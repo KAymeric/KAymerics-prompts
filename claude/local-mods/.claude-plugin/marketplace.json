@@ -1,0 +1,11 @@
+{
+  "name": "local-mods",
+  "owner": { "name": "Aymeric Kreuzer" },
+  "plugins": [
+    {
+      "name": "usage-blueprint",
+      "source": "./usage-blueprint",
+      "description": "Live usage band: model, context tokens, 5-hour window, weekly limit and session cost"
+    }
+  ]
+}

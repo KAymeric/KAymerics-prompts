@@ -1,0 +1,2 @@
+- [usage-blueprint mod](usage-blueprint-mod.md) — where the usage band mod lives and how to update it
+- [No package install without confirmation](no-package-install-without-confirmation.md) — always ask before adding/installing any dependency

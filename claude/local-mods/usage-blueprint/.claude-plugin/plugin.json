@@ -1,0 +1,1 @@
+{ "name": "usage-blueprint", "version": "0.1.0", "description": "Live usage band: context tokens, 5-hour window, weekly limit and session cost", "types": "./types/index.d.ts" }

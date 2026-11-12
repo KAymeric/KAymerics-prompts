@@ -1,0 +1,20 @@
+{
+  "extraKnownMarketplaces": {
+    "local-mods": {
+      "source": {
+        "source": "directory",
+        "path": "/home/aymeric/.claude/local-mods"
+      }
+    }
+  },
+  "theme": "dark",
+  "agentPushNotifEnabled": true,
+  "enabledPlugins": {
+    "usage-blueprint@local-mods": true
+  },
+  "attribution": {
+    "commit": "",
+    "pr": "",
+    "sessionUrl": false
+  }
+}
