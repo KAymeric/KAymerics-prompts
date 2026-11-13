@@ -81,4 +81,6 @@ Never as a draft unless the user asks for it. Show the user the title, base and 
 gh pr create --base <base> --title "<title>" --body-file <file> --reviewer Puillet,doninj,Jagagon,lotholf,jbdz [--label bug]
 ```
 
-Give the user the PR URL(s) at the end.
+## 8. Always return the PR link
+
+Once a PR is created, always send the user its full URL (e.g. `https://github.com/cospirit/back-office/pull/235`), alone on its own line at the top of your final message so it is easy to click. One line per PR when several were created. Never skip this, even when other steps (edits, cross-references) follow.
