@@ -92,3 +92,10 @@ If queries were added in Phase 2, create a new PhpStorm database console with on
 - Open each preprod PR that was modified in the user's browser: `gh pr view <n> -R cospirit/<repo> --web`.
 - Give the user the list of merged PRs, grouped by ticket then project, with full URLs.
 - If a console was created, tell the user its name and path, and that it appears in PhpStorm under *Scratches and Consoles > Database Consoles > <data source>* so they can open it.
+- At the very end of the final message, give a Teams message ready to copy, in a code block, listing the YouTrack tickets exactly as the user provided them (only those actually put into preprod, in the given order):
+  ```
+  Bonjour, les tickets suivants sont en preprod :
+  - [pml-1042](https://cospirit.myjetbrains.com/youtrack/issue/pml-1042) Intégrer calculette pour presta dans le frais de prod Affichage
+  - ...
+  ```
+  If some tickets were skipped (no PR found, conflict not resolved...), leave them out and say so above the message. Never send it yourself.
