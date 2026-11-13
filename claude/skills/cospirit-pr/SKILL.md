@@ -5,8 +5,13 @@ description: Open a pull request on a Cospirit repository (remote github.com:cos
 
 # Opening a PR on a Cospirit repository
 
-Applies to any repo whose `origin` is `github.com:cospirit/<repo>`. Use the `gh` CLI (logged in as `KAymeric`).
+Applies to any repo whose `origin` is `github.com:cospirit/<repo>`. Use the `gh` CLI.
 No Claude attribution anywhere (title, body, commits).
+
+## Personal settings
+
+Read `config.md` next to this file: it holds the user's GitHub login, reviewers, YouTrack URL and PhpStorm consoles path, referred to below as `<config: ...>`.
+If `config.md` does not exist, read `SETUP.md` next to this file, follow it, then continue here.
 
 ## 0. Input: the YouTrack ticket
 
@@ -52,35 +57,34 @@ Example: `Ajout automatique du contact régie en tant que recipient des nouveaux
 - Single PR: remove the whole section (heading and its `---` separator).
 
 ### Ticket YouTrack
-Paste the ticket provided by the user as is, as a list item. Past PRs render it as
-`- [lcspirit-1366](https://cospirit.myjetbrains.com/youtrack/issue/lcspirit-1366) Lot 1.3 emails - Automatisation du contact régie`
-so if the user gave plain text, link the id that way and keep the rest of the text unchanged.
+Paste the ticket provided by the user as is, as a list item, with the id linked to `<config: youtrack_issue_url><ticket-id>`:
+`- [lcspirit-1366](<config: youtrack_issue_url>lcspirit-1366) Lot 1.3 emails - Automatisation du contact régie`
+Keep the rest of the text unchanged.
 
 ### Requête SQL
 Put in it every SQL command when either:
 - we worked on SQL queries during this work, or
 - a PhpStorm database console is named after the ticket id: search case-insensitively in
-  `~/.config/JetBrains/PhpStorm*/consoles/db/*/` for a file whose name contains the ticket id (e.g. `lcspirit-1366.sql`; use the most recent PhpStorm version if several match) and include all its commands.
+  `<config: phpstorm_consoles_glob>` for a file whose name contains the ticket id (e.g. `lcspirit-1366.sql`; use the most recent PhpStorm version if several match) and include all its commands.
 
 Otherwise, ask the user whether the section can be removed. Never remove it without asking.
 
-## 5. Labels
+## 5. Reviewers
 
-- Support / bugfix PRs: add the `bug` label (`--label bug`).
+`<config: reviewers>` on every Cospirit repo. Never request the PR author (`<config: github_login>`) as reviewer.
 
-## 6. Reviewers
-
-Same reviewers on every Cospirit repo: `Puillet`, `doninj`, `Jagagon`, `lotholf`, `jbdz`.
-Never request the PR author (`KAymeric`) as reviewer.
-
-## 7. Create it
+## 6. Create it
 
 Never as a draft unless the user asks for it. Show the user the title, base and body, then push the branch and run:
 
 ```bash
-gh pr create --base <base> --title "<title>" --body-file <file> --reviewer Puillet,doninj,Jagagon,lotholf,jbdz [--label bug]
+gh pr create --base <base> --title "<title>" --body-file <file> --reviewer <config: reviewers, comma-separated>
 ```
 
-## 8. Always return the PR link
+## 7. Open and return the PR link
 
-Once a PR is created, always send the user its full URL (e.g. `https://github.com/cospirit/back-office/pull/235`), alone on its own line at the top of your final message so it is easy to click. One line per PR when several were created. Never skip this, even when other steps (edits, cross-references) follow.
+Once a PR is created:
+- open it in a new tab of the user's browser: `gh pr view <url> --web`;
+- always send the user its full URL (e.g. `https://github.com/cospirit/back-office/pull/235`), alone on its own line at the top of your final message. One line per PR when several were created.
+
+Never skip this, even when other steps (edits, cross-references) follow.

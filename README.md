@@ -27,3 +27,7 @@ Install on a new machine (existing files are backed up first):
 ```bash
 ./install.sh
 ```
+
+## Skill personal settings
+
+Some skills (e.g. `cospirit-pr`) read a personal `config.md` next to their `SKILL.md`. It is not versioned: on first use, the skill follows its `SETUP.md` to create it from `config.example.md`.

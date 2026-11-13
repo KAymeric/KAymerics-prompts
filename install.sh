@@ -21,7 +21,7 @@ sed "s#/home/aymeric#$HOME#g" "$REPO/claude/settings.json" > "$DEST/settings.jso
 for skill in "$REPO"/claude/skills/*/; do
   name="$(basename "$skill")"
   [ -d "$DEST/skills/$name" ] && cp -r "$DEST/skills/$name" "$BACKUP/"
-  rsync -a --delete "$skill" "$DEST/skills/$name/"
+  rsync -a --delete --exclude config.md "$skill" "$DEST/skills/$name/"
 done
 
 rsync -a --delete "$REPO/claude/local-mods/" "$DEST/local-mods/"

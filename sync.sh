@@ -14,7 +14,7 @@ cp "$SRC/CLAUDE.md" "$SRC/settings.json" "$REPO/claude/"
 for skill in "$SRC"/skills/*/; do
   name="$(basename "$skill")"
   [ "$name" = "synced" ] && continue
-  rsync -a --delete "$skill" "$REPO/claude/skills/$name/"
+  rsync -a --delete --exclude config.md "$skill" "$REPO/claude/skills/$name/"
 done
 
 rsync -a --delete --exclude node_modules "$SRC/local-mods/" "$REPO/claude/local-mods/"
