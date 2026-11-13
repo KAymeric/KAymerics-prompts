@@ -93,10 +93,51 @@ If queries were added in Phase 2, create a new PhpStorm database console with on
 - Give the user the list of merged PRs, grouped by ticket then project, with full URLs.
 - If a console was created, tell the user its name and path, and that it appears in PhpStorm under *Scratches and Consoles > Database Consoles > <data source>* so they can open it.
 - At the very end of the final message, give a Teams message ready to copy, listing the YouTrack tickets as the user provided them (only those actually put into preprod, in the given order).
-  Teams does not render Markdown pasted as plain text, so write it as **rendered Markdown, never inside a code block**: the user copies the rendered text, which keeps the ticket id as a clickable link. Separate it from the rest with a horizontal rule (`---`) and nothing after it:
+  Teams does not render Markdown pasted as plain text, so never put it in a code block. Show it with the `show_widget` tool (call `read_me` first) as a card with a one-click "Copier pour Teams" button that copies it as rich text, so the ticket id stays a clickable link. Use exactly this widget, with one `<li>` per ticket (ticket id as the link text, the rest of the ticket text after it):
 
-  ---
-  Bonjour, les tickets suivants sont en preprod :
-  - [pml-1042](https://cospirit.myjetbrains.com/youtrack/issue/pml-1042) Intégrer calculette pour presta dans le frais de prod Affichage
-  - ...
+  ```html
+  <h2 class="sr-only">Message Teams des tickets en preprod, avec un bouton pour le copier</h2>
+  <div style="background: var(--surface-2); border: 0.5px solid var(--border); border-radius: 12px; padding: 1rem 1.25rem;">
+    <div id="msg" style="font-size: 15px; line-height: 1.7; color: var(--text-primary);">
+      <p style="margin: 0;">Bonjour, les tickets suivants sont en preprod :</p>
+      <ul style="margin: 4px 0 0; padding-left: 20px;">
+        <li><a href="https://cospirit.myjetbrains.com/youtrack/issue/pml-1042">pml-1042</a> Intégrer calculette pour presta dans le frais de prod Affichage</li>
+      </ul>
+    </div>
+    <div style="display: flex; align-items: center; gap: 12px; margin-top: 12px;">
+      <button id="copy"><i class="ti ti-copy" aria-hidden="true" style="margin-right: 6px;"></i>Copier pour Teams</button>
+      <span id="status" style="font-size: 13px; color: var(--text-secondary);"></span>
+    </div>
+  </div>
+  <script>
+  const btn = document.getElementById('copy');
+  const status = document.getElementById('status');
+  btn.addEventListener('click', async () => {
+    const el = document.getElementById('msg');
+    const html = el.innerHTML;
+    const text = el.innerText;
+    try {
+      await navigator.clipboard.write([new ClipboardItem({
+        'text/html': new Blob([html], { type: 'text/html' }),
+        'text/plain': new Blob([text], { type: 'text/plain' })
+      })]);
+      status.textContent = 'Copié';
+    } catch (e) {
+      try {
+        const range = document.createRange();
+        range.selectNodeContents(el);
+        const sel = window.getSelection();
+        sel.removeAllRanges(); sel.addRange(range);
+        const ok = document.execCommand('copy');
+        sel.removeAllRanges();
+        status.textContent = ok ? 'Copié' : 'Copie bloquée : sélectionne le texte et fais Ctrl+C';
+      } catch (e2) {
+        status.textContent = 'Copie bloquée : sélectionne le texte et fais Ctrl+C';
+      }
+    }
+  });
+  </script>
+  ```
+
+  Show this widget last, after the final text message. If `show_widget` is not available, fall back to rendered Markdown (not a code block) after a `---` line.
   If some tickets were skipped (no PR found, conflict not resolved...), leave them out and say so above the message. Never send it yourself.
