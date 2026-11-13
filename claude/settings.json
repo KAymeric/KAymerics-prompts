@@ -16,5 +16,11 @@
     "commit": "",
     "pr": "",
     "sessionUrl": false
+  },
+  "permissions": {
+    "allow": [
+      "Bash(git -C /home/aymeric/PhpstormProjects/KAymerics-prompts push)",
+      "Bash(git -C /home/aymeric/PhpstormProjects/KAymerics-prompts push:*)"
+    ]
   }
 }

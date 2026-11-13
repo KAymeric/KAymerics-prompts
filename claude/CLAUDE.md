@@ -30,3 +30,4 @@ For any repo whose remote is `github.com:cospirit/*`, always follow the `cospiri
 
 My Claude Code config lives in the private repo `github.com:KAymeric/KAymerics-prompts` (local clone: `~/PhpstormProjects/KAymerics-prompts`).
 Whenever we create or change a skill, mod, global CLAUDE.md, global settings or memory, run its `./sync.sh`, then commit and push to that repo without asking (conventional commit message, no Claude attribution). Clone it first if missing.
+Pushing to this repo (and only this one) is allowed without restriction: always push with a separate command written exactly `git -C /home/aymeric/PhpstormProjects/KAymerics-prompts push` (never chained with `&&`, never `cd` + `git push`), which matches the allow rule in `~/.claude/settings.json`.
