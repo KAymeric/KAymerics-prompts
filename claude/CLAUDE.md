@@ -14,6 +14,14 @@ All projects run in Docker containers. Never run project commands (php, composer
 - Never add "Generated with Claude Code" (or any similar mention) to commit messages or PR descriptions.
 - No attribution to Claude of any kind in commits or PR descriptions (no trailers, no links, no emoji signatures).
 
+## Deployments: never from docker-deployment
+
+Never deploy from the `docker-deployment` project (github.com:cospirit/docker-deployment), never run its deployment commands, and never suggest doing so. Deployments are always done by the user.
+
+## Preprod on Cospirit repos
+
+To put tickets/PRs into preprod on Cospirit projects, always follow the `cospirit-preprod` skill (`~/.claude/skills/cospirit-preprod/SKILL.md`).
+
 ## Pull requests on Cospirit repos
 
 For any repo whose remote is `github.com:cospirit/*`, always follow the `cospirit-pr` skill (`~/.claude/skills/cospirit-pr/SKILL.md`) to create a PR: base branch, title convention, filling the repo's template, labels and reviewers.
