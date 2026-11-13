@@ -13,6 +13,7 @@ description: Put YouTrack tickets / PRs into preprod on Cospirit projects (githu
 - Never resolve a merge conflict yourself.
 - Never close, merge (on GitHub) or approve a PR: feature PRs are only merged locally into the preprod branch for testing; they are merged into their base branch later by the team.
 - Never push. The user tests and pushes.
+- **Never execute the SQL queries yourself**, on any database (no PhpStorm SQL tool, no `psql`, no `docker compose exec ... psql`, nothing). You only write them into the PR descriptions and the PhpStorm console; the user runs them.
 - No Claude attribution anywhere.
 
 ## Personal settings
@@ -78,7 +79,7 @@ For each project that received merges, edit its preprod PR body (`gh pr view <n>
 If queries were added in Phase 2, create a new PhpStorm database console with only those queries (not the ones that were already there):
 - path: `<config: phpstorm_consoles_dir><data source uuid>/preprod-<YYYY-MM-DD>.sql`, using the preprod data source from `<config: preprod_datasources>` for the database concerned (cospirit-api or lc-spirit). Add a `-2`, `-3`... suffix if the file exists.
 - one file per database; group the queries by PR with a `-- <PR url>` comment above each group.
-- never run the queries.
+- never execute them (see Absolute rules): creating the console file is the only action.
 
 ## Phase 4 - Wrap-up
 
