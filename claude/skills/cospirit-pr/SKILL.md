@@ -74,6 +74,8 @@ Put in it every SQL command when either:
 
 Otherwise, ask the user whether the section can be removed. Never remove it without asking.
 
+When the work has both a back PR (`cospirit-api`) and front PR(s), put the SQL only in the back PR: remove the whole section (heading and its `---` separator) from the front PR(s), without asking.
+
 ## 5. Reviewers
 
 `<config: reviewers>` on every Cospirit repo. Never request the PR author (`<config: github_login>`) as reviewer.
