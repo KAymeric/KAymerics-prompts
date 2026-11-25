@@ -78,12 +78,16 @@ Otherwise, ask the user whether the section can be removed. Never remove it with
 
 `<config: reviewers>` on every Cospirit repo. Never request the PR author (`<config: github_login>`) as reviewer.
 
+## 5b. Assignee
+
+Always assign the user (`<config: github_login>`) to every PR created.
+
 ## 6. Create it
 
 Never as a draft unless the user asks for it. Show the user the title, base and body, then push the branch and run:
 
 ```bash
-gh pr create --base <base> --title "<title>" --body-file <file> --reviewer <config: reviewers, comma-separated>
+gh pr create --base <base> --title "<title>" --body-file <file> --reviewer <config: reviewers, comma-separated> --assignee <config: github_login>
 ```
 
 ## 7. Open and return the PR link
