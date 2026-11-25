@@ -32,6 +32,11 @@ Report the problems found to the user and wait for their go before creating the 
   `git fetch origin && git branch -r --list 'origin/release/*' | sed 's#.*origin/##' | sort -V | tail -1`
 - Every other repo: the default branch (`master` or `main`, see `git symbolic-ref refs/remotes/origin/HEAD`).
 
+## 2b. Branch name
+
+If the work is not on a feature branch yet, create one named like the repo's other branches, never after the ticket id:
+`feature/<short-kebab-description>` for a feature, `bugfix/<short-kebab-description>` for a fix (e.g. `feature/provider-contacts`, `bugfix/product-code-adv`). Check `gh pr list --state all -L 10 --json headRefName` to confirm the repo's convention. Use the same branch name in every repo of a multi-repo work.
+
 ## 3. Title
 
 `[<ticket-id>] <commit message>`
