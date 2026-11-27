@@ -89,6 +89,7 @@ If queries were added in Phase 2, create a new PhpStorm database console with on
 
 ## Phase 4 - Wrap-up
 
+- Move each ticket actually put into preprod to the "En recette" column with the `cospirit-youtrack` skill, without asking. State change only: never add the user (or anyone) as assignee, never touch the ticket's content, title or tags. Report which tickets were moved (and any that failed).
 - Open each preprod PR that was modified in the user's browser: `gh pr view <n> -R cospirit/<repo> --web`.
 - Give the user the list of merged PRs, grouped by ticket then project, with full URLs.
 - If a console was created, tell the user its name and path, and that it appears in PhpStorm under *Scratches and Consoles > Database Consoles > <data source>* so they can open it.

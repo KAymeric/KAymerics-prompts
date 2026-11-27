@@ -99,3 +99,7 @@ Once a PR is created:
 - always send the user its full URL (e.g. `https://github.com/cospirit/back-office/pull/235`), alone on its own line at the top of your final message. One line per PR when several were created.
 
 Never skip this, even when other steps (edits, cross-references) follow.
+
+## 8. YouTrack ticket
+
+Once the PR(s) are created, ask the user whether to move the ticket to the "À vérifier" column. Only on a yes, do it with the `cospirit-youtrack` skill (State change only: never touch the ticket's content, title, tags or assignees).

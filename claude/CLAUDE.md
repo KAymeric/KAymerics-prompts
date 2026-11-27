@@ -31,3 +31,10 @@ For any repo whose remote is `github.com:cospirit/*`, always follow the `cospiri
 My Claude Code config lives in the private repo `github.com:KAymeric/KAymerics-prompts` (local clone: `~/PhpstormProjects/KAymerics-prompts`).
 Whenever we create or change a skill, mod, global CLAUDE.md, global settings or memory, run its `./sync.sh`, then commit and push to that repo without asking (conventional commit message, no Claude attribution). Clone it first if missing.
 Pushing to this repo (and only this one) is allowed without restriction: always push with a separate command written exactly `git -C /home/aymeric/PhpstormProjects/KAymerics-prompts push` (never chained with `&&`, never `cd` + `git push`), which matches the allow rule in `~/.claude/settings.json`.
+
+## YouTrack (Cospirit)
+
+Always use the `cospirit-youtrack` skill (`~/.claude/skills/cospirit-youtrack/SKILL.md`) to read or update a ticket. The API token is in `~/.config/youtrack/token`, created by me.
+- The token is secret: never print, log, copy or commit it, never store it anywhere else (in particular nothing under `~/.claude`, which is synced to KAymerics-prompts). Never ask me to paste it in the chat.
+- Never modify a ticket's content (description, comments, attachments), title or tags.
+- When I give you a new YouTrack ticket to work on, ask me whether to add me to its assignees (skip the question if I already am one).
