@@ -30,15 +30,21 @@ AUTH="Authorization: Bearer $(cat ~/.config/youtrack/token)"
 
 ## Move a ticket to a column
 
-Board columns are values of the `State` field (named `State` or `État`).
+Board columns are values of the `State` field. The user's column names map to these State values:
+
+| Column (user's words) | State value |
+|---|---|
+| À vérifier | `To Verify` |
+| En recette | `Staging` |
+
 1. Read the ticket and take the State field's possible values.
-2. Match the asked column (e.g. "à vérifier", "en recette") against them, ignoring case and accents. If none or several match, ask the user which value to use.
-3. If the ticket is already in that state, do nothing. Otherwise apply `<State field name> <value>` (wrap a multi-word value in braces: `State {À vérifier}`).
+2. Use the mapping above; for any other column, match it against the values ignoring case and accents. If the value is not among the ticket's possible values, or nothing / several match, ask the user which value to use.
+3. If the ticket is already in that state, do nothing. Otherwise apply `State <value>` (wrap a multi-word value in braces: `State {To Verify}`).
 4. Read it again to check the new state, and report it.
 
 ## Add the user as assignee
 
-1. Read the ticket; find the assignee field (`Assignee`, `Responsable`, `Responsables`...). If unsure, ask.
+1. Read the ticket; the assignee field is `Assignee` (multi-user). If a project has none, ask.
 2. If the user (`users/me` login) is already in it, do nothing.
 3. Otherwise apply `add <field name> me` for a multi-value field, `<field name> me` only if the field is single-value **and empty** (never replace someone else: ask the user instead).
 4. Read it again to check, and report it.
