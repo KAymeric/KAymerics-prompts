@@ -55,7 +55,7 @@ For each ticket, in the given order:
    - GitHub reports conflicts with the base branch (`mergeable` is `CONFLICTING` / `mergeStateStatus` is `DIRTY`).
 5. **Merge into preprod**, for each concerned project:
    `git checkout <preprod branch> && git pull && git merge --no-verify <head branch>`
-6. **Conflict:** if the merge reports a conflict, stop. Tell the user there is a conflict and name the project(s) concerned (and the branch being merged). Do not touch the conflicted files, do not abort the merge. Wait until the user says the conflicts are resolved, then check `git status`: if the conflicts are resolved but the merge is not committed yet, finish it yourself with `git commit --no-verify --no-edit`. Once no merge is in progress, resume with the next project / ticket.
+6. **Conflict:** if the merge reports a conflict, stop. Tell the user there is a conflict and name the project(s) concerned (and the branch being merged). Do not touch the conflicted files, do not abort the merge. Wait until the user says the conflicts are resolved, then check `git status`: if the conflicts are resolved but the merge is not committed yet, finish it yourself: first `git add` the files the user edited while resolving (check `git status` for unstaged changes in the conflicted files, and in files their resolution touched), then `git commit --no-verify --no-edit`. Once no merge is in progress, resume with the next project / ticket.
 7. No conflict: go on with the next ticket.
 
 **Migrations.** Before the first merge of the run, note the preprod HEAD of `cospirit-api` and `lc-spirit` (`git rev-parse HEAD` on the preprod branch). Once every ticket is merged, list the migration files added since then:
